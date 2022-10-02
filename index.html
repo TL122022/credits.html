@@ -1,0 +1,273 @@
+<html><head>
+        <meta charset="UTF-8">
+        <style>
+        @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+
+        html, body {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400;
+            background: #212121;
+            height: 100%;
+        }
+        .container {
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            overflow: hidden;
+        }
+        .text {
+            font-weight: 400;
+            background: transparent;
+            font-size: 35px;
+            color: #fafafa;
+            border: none;
+            border-radius: 25px;
+            padding: 1.2em;
+            justify-content: center;
+            align-items: center;    
+            max-width: 630px;
+            animation: shadow-animate 4s linear infinite; 
+            /* box-shadow: 0 0 10px #fafafa,
+            0 0 25px #fafafa,
+            0 0 50px #fafafa; */
+        }
+        div .text:hover {
+          animation: up 5s linear ease-in-out;
+          cursor: pointer;
+        }
+        @keyframes up {
+          0% {
+            opacity: 1;
+            margin-bottom: 50%;
+          }
+          50% {
+            margin-bottom: 75%;
+            opacity: 0.5;
+          }
+          100% {
+            margin-bottom: 100%;
+            opacity: 0;
+          }
+        }
+        @keyframes shadow-animate {
+          0% {
+            box-shadow: inset 0 0 10px #ff00f2,
+           /* inset 0 0 25px #ff00f2,
+            inset 0 0 50px #ff00f2, */
+            0 0 20px #ff00f2;
+          /*  0 0 50px #ff00f2; */
+          }
+          25% {
+            box-shadow: inset 0 0 10px #ffff00,
+          /*  inset 0 0 25px #ffff00,
+            inset 0 0 50px #ffff00, */
+            0 0 20px #ffff00;
+          /*  0 0 50px #ffff00; */
+          }
+          50% {
+            box-shadow: inset 0 0 10px #03C04A,
+          /*  inset 0 0 25px #03C04A,
+            inset 0 0 50px #03C04A, */
+            0 0 20px #03C04A;
+          /*  0 0 50px #03C04A; */
+          }
+          75% {
+            box-shadow: inset 0 0 10px #00ffff,
+          /*  inset 0 0 25px #00ffff,
+            inset 0 0 50px #00ffff, */
+            0 0 20px #00ffff;
+          /*  0 0 50px #00ffff; */
+          }
+          100% {
+            box-shadow: inset 0 0 10px #ff00f2,
+          /*  inset 0 0 25px #ff00f2,
+            inset 0 0 50px #ff00f2, */
+            0 0 20px #ff00f2;
+          /*  0 0 50px #ff00f2; */
+          } 
+        }  
+     /*   .box {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            overflow: hidden;
+        }
+        .box::before {
+          content: '';
+          position: absolute;
+          width: 1100px;
+          height: 800px;
+          background-image: conic-gradient(transparent, transparent,transparent, #00ccff);
+          animation: animate 4s linear infinite;
+        }
+        .box::after {
+          content: '';
+          position: absolute;
+          width: 1100px;
+          height: 800px;
+          background-image: conic-gradient(transparent, transparent,transparent, #d400d4);
+          animation: animate 4s linear infinite;
+          animation-delay: -2s;
+        }
+        .box span {
+          position: absolute;
+          inset: 5px;
+          border-radius: 10px;
+          background: transparent;
+        }
+        @keyframes animate {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        } */
+        .special {
+            color: transparent;
+            background: linear-gradient(210deg, #555, rgb(104, 97, 97), rgb(150, 143, 143));
+            -webkit-background-clip: text;
+            filter: blur(0.5px);
+            max-width: 400px;
+        }
+    /*    ul {
+          list-style: none;
+          text-decoration: none;
+          display: inline-block;
+        }*/
+        .center {
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        hr {
+          border: 1px solid rgb(255, 0, 200);
+          animation: hr-animate 1.6s linear infinite;
+        }
+        @keyframes hr-animate {
+          0% {
+              border: 1px solid rgb(255, 0, 200);
+          }
+          33% {
+              border: 1px solid yellow;
+          }
+          66% {
+              border: 1px solid cyan;
+          }
+          100% {
+              border: 1px solid rgb(255, 0, 200);
+          }
+        }
+        </style>
+    </head>
+
+
+    <body>
+
+    <div class="container">
+        <div class="text">PDIDOCE TENA<span class="special">L</span>ON<span class="special">A</span></div>
+    </div>
+
+
+<script>
+class TextScramble {
+    constructor(el) {
+      this.el = el
+      this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      this.update = this.update.bind(this)
+    }
+    setText(newText) {
+      const oldText = this.el.innerText
+      const length = Math.max(oldText.length, newText.length)
+      const promise = new Promise((resolve) => this.resolve = resolve)
+      this.queue = []
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || ''
+        const to = newText[i] || ''
+        const start = Math.floor(Math.random() * 90)
+        const end = start + Math.floor(Math.random() * 52)
+        this.queue.push({ from, to, start, end })
+      }
+      cancelAnimationFrame(this.frameRequest)
+      this.frame = 0
+      this.update()
+      return promise
+    }
+    update() {
+      let output = ''
+      let complete = 0
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i]
+        if (this.frame >= end) {
+          complete++
+          output += to
+        } else if (this.frame >= start) {
+          if (!char || Math.random() < 0.48) {
+            char = this.randomChar()
+            this.queue[i].char = char
+          }
+          output += `<span class="special">${char}</span>`
+        } else {
+          output += from
+        }
+      }
+      this.el.innerHTML = output
+      if (complete === this.queue.length) {
+        this.resolve()
+      } else {
+        this.frameRequest = requestAnimationFrame(this.update)
+        this.frame++
+      }
+    }
+    randomChar() {
+      return this.chars[Math.floor(Math.random() * this.chars.length)]
+    }
+  }
+  
+  const phrases = [
+    'DIRECTED BY: MATTHEW',
+    'MUSIC SUPERVISOR: TENGLONG',
+    'STORY BY: JOSHUA <hr/> ADAPTED FROM: 华文哲学书',
+    'PRODUCER: ZACHARY',
+    'EDITOR: TENGLONG',
+    'CAST: <br>ETHAN NEO AS JOHN <br>ZHUOYAN AS JACK<br> XIAOYU AS ALEX',
+    'CAST: <br>GY AS BOY <br> PRO AS NICE',
+    'PHOTOGRAPHER: RAY',
+    'MUSIC: <br> BUSINESS INSPIRE by MediaM <br>IF YOU JUST BELIEVE by DimmySad'
+  ]
+  
+
+  const el = document.querySelector('.text')
+  const fx = new TextScramble(el)
+
+  
+  let counter = 0
+  const next = () => {
+    fx.setText(phrases[counter]).then(() => {
+      setTimeout(next, 2300)
+    })
+    counter = (counter + 1) // % phrases.length (This is for repetition)
+  }
+  next()
+
+    /* const cont = () => {
+    fx.setText(cast[counter]).then(() => {
+      setTimeout(next, 3400)
+    }) 
+    counter = (counter + 1) // % phrases.length */
+  /*if (counter < 4) {
+    next()
+  } else  {
+    cont()
+  } */
+  
+
+</script>
+
+    
+</body></html>
