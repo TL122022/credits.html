@@ -192,7 +192,7 @@ class TextScramble {
         const from = oldText[i] || ''
         const to = newText[i] || ''
         const start = Math.floor(Math.random() * 90)
-        const end = start + Math.floor(Math.random() * 52)
+        const end = start + Math.floor(Math.random() * 40)
         this.queue.push({ from, to, start, end })
       }
       cancelAnimationFrame(this.frameRequest)
@@ -251,7 +251,7 @@ class TextScramble {
   let counter = 0
   const next = () => {
     fx.setText(phrases[counter]).then(() => {
-      setTimeout(next, 2300)
+      setTimeout(next, 2500)
     })
     counter = (counter + 1) // % phrases.length (This is for repetition)
   }
