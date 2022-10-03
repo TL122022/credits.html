@@ -1,6 +1,7 @@
 <!-- 
     https://github.com/TL122022/credits.html/ by TL122022 
-    Free for personal use
+    Free for personal and commercial use under the MIT license
+    https://github.com/TL122022/credits.html/blob/main/LICENSE.md
 --> 
 <html>
     <head>
@@ -196,7 +197,7 @@ class TextScramble {
       for (let i = 0; i < length; i++) {
         const from = oldText[i] || ''
         const to = newText[i] || ''
-        const start = Math.floor(Math.random() * 70)
+        const start = Math.floor(Math.random() * 75)
         const end = start + Math.floor(Math.random() * 40)
         this.queue.push({ from, to, start, end })
       }
@@ -245,7 +246,7 @@ class TextScramble {
     'CAST: <br>NAME AS CHARACTER <br>NAME AS CHARACTER<br>NAME AS CHARACTER',
     'CAST: <br>NAME AS CHARACTER<br>NAME AS CHARACTER',
     'PHOTOGRAPHER: NAME',
-    'MUSIC: <br> BUSINESS INSPIRE by MediaM <br>IF YOU JUST BELIEVE by DimmySad'
+    'MUSIC: <br>SONG NAME BY COMPOSER NAME<br>SONG NAME BY COMPOSER NAME'
   ]
   
 
@@ -258,7 +259,7 @@ class TextScramble {
     fx.setText(phrases[counter]).then(() => {
       setTimeout(next, 3100)
     })
-    counter = (counter + 1) // % phrases.length (This is for repetition)
+    counter = (counter + 1) // % phrases.length (This is for infinite loop)
   }
   next()
 
